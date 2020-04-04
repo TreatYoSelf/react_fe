@@ -1,12 +1,18 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import Landing from './src/components/Landing/Landing';
+import Profile from './src/components/Profile/Profile';
+import { NativeRouter, Route } from "react-router-native";
+
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Landing />
-    </View>
+    <NativeRouter>
+      <View style={styles.container}>
+        <Route exact path="/" component={Landing} />
+        <Route exact path="/profile" component={Profile} />
+      </View>
+    </NativeRouter>
   );
 }
 
