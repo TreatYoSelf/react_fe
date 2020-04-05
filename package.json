@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@react-native-community/google-signin": "^4.0.0",
+    "@react-native-firebase/app": "^6.4.0",
     "expo": "~37.0.3",
     "react": "~16.9.0",
     "react-dom": "~16.9.0",
