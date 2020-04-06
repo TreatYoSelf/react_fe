@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, Image, View } from 'react-native';
-import { Link } from "react-router-native";
+// import { Link } from "react-router-native";
 
 export default function Landing() {
     return (
