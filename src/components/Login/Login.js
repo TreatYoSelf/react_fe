@@ -1,7 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { StyleSheet, Text, Image, View, Button } from 'react-native';
 import * as Google from 'expo-google-app-auth';
-// import { Link } from "react-router-native";
+import Profile from '../Profile/Profile';
+// import Landing from '../Landing/Landing';
+
 
 export default function Login() {
     const [userDetails, setUserDetails] = useState({});
@@ -26,13 +28,13 @@ export default function Login() {
         }
     }
 
-    console.log('userTest', userDetails)
     return (
         <View style={styles.container}>
             {signedIn ? (
-                <LoggedInPage name={userDetails.user.name} photoUrl={userDetails.user.photoUrl} />
+                <Profile name={userDetails.user.name} photoUrl={userDetails.user.photoUrl} />
             ) : (
                 <LoginPage signIn={this.signIn} />
+                // <Landing signIn={this.signIn}/>
                 )}
         </View>
     )
@@ -41,20 +43,22 @@ export default function Login() {
 const LoginPage = props => {
     return (
         <View>
+            <Image source={require("../../../assets/logo.png")} style={{ width: 200, height: 200 }} />
+            <Text>An app where you can treat yourself to some personal time, guilt free.</Text>
             <Text style={styles.header}>Sign In With Google</Text>
             <Button title="Sign in with Google" onPress={() => props.signIn()} />
         </View>
     )
 }
 
-const LoggedInPage = props => {
-    return (
-        <View style={styles.container}>
-            <Text style={styles.header}>Welcome:{props.name}</Text>
-            <Image style={styles.image} source={{ uri: props.photoUrl }} />
-        </View>
-    )
-}
+// const LoggedInPage = props => {
+//     return (
+//         <View style={styles.container}>
+//             <Text style={styles.header}>Welcome:{props.name}</Text>
+//             <Image style={styles.image} source={{ uri: props.photoUrl }} />
+//         </View>
+//     )
+// }
 
 const styles = StyleSheet.create({
     container: {
