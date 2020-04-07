@@ -9,10 +9,7 @@ export default function App() {
   return (
     // <NativeRouter>
       <View style={styles.container}>
-        <Profile />
         <Landing />
-        {/* <Route exact path="/" component={Landing} />
-        <Route exact path="/profile" component={Profile} /> */}
       </View>
     // </NativeRouter>
   );
