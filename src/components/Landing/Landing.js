@@ -7,7 +7,6 @@ export default function Landing() {
         <View style={styles.container}>
             <Image source={require("../../../assets/logo.png")} style={{ width: 200, height: 200 }} />
             <Text>An app where you can treat yourself to some personal time, guilt free.</Text>
-            <Link to="/profile"><Text>Profile</Text></Link>
         </View>
     );
 }
