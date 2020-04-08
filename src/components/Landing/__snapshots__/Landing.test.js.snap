@@ -1,0 +1,69 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Landing /> renders correctly 1`] = `
+<View>
+  <Image
+    source={1}
+    style={
+      Object {
+        "height": 200,
+        "width": 200,
+      }
+    }
+  />
+  <Text>
+    An app where you can treat yourself to some personal time, guilt free.
+  </Text>
+  <Text
+    style={
+      Object {
+        "fontSize": 25,
+      }
+    }
+  >
+    Sign In With Google
+  </Text>
+  <View
+    accessibilityRole="button"
+    accessibilityStates={Array []}
+    accessible={true}
+    focusable={true}
+    isTVSelectable={true}
+    onClick={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Object {
+        "opacity": 1,
+      }
+    }
+  >
+    <View
+      style={
+        Array [
+          Object {},
+        ]
+      }
+    >
+      <Text
+        style={
+          Array [
+            Object {
+              "color": "#007AFF",
+              "fontSize": 18,
+              "padding": 8,
+              "textAlign": "center",
+            },
+          ]
+        }
+      >
+        Sign in with Google
+      </Text>
+    </View>
+  </View>
+</View>
+`;

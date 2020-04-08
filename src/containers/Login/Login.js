@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, Image, View, Button } from 'react-native';
 import * as Google from 'expo-google-app-auth';
-import Profile from '../Profile/Profile';
+import Profile from '../../components/Profile/Profile';
 // import Landing from '../Landing/Landing';
 
 

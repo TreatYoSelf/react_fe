@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, View } from 'react-native';
 // import Landing from './src/components/Landing/Landing';
 // import Profile from './src/components/Profile/Profile';
-import Login from './src/components/Login/Login';
+import Login from '../../containers/Login/Login';
 import { NativeRouter, Route } from "react-router-native";
 
 export default function App() {
