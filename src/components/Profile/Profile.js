@@ -1,21 +1,16 @@
-import React, { useState } from 'react';
-import { StyleSheet, Text, Image, View, Picker } from 'react-native';
-import { mockTreat } from '../../mockData/mockTreat';
+import React from 'react';
+import { StyleSheet, Text, Image, View } from 'react-native';
+import SuggestedTreat from '../../containers/SuggestedTreat/SuggestedTreat';
 
-export default function Profile() {
-    const {icon, title, rating: defaultRating} = mockTreat;
-    const [rating, setRating] = useState(defaultRating);
+export default function Profile(props) {
+    //need to fetch all activities for a user, and map over them adding suggesteTreats for each
+    //temporarily load SuggestedTreat
 
-    console.log(icon)
     return (
         <View style={styles.container}>
-            <Image source={require("../../../assets/logo.png")} style={{ width: 200, height: 200 }} />
-            <Text>{title}</Text>
-            <Picker
-                selectedValue={rating}
-                style={{ height: 50, width: 150 }}
-                onValueChange={(itemValue, itemIndex) => setRating(itemValue)}
-            />
+            <Text style={styles.header}>Welcome:{props.name}</Text>
+            <Image style={styles.image} source={{ uri: props.photoUrl }} />
+            <SuggestedTreat />
         </View>
     );
 }
@@ -23,11 +18,19 @@ export default function Profile() {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#fff',
-        alignItems: 'center',
-        justifyContent: 'center',
-        borderWidth: 1,
-        height: 30,
-        width: 100
+        backgroundColor: "#fff",
+        alignItems: "center",
+        justifyContent: "center"
     },
-});
+    header: {
+        fontSize: 25
+    },
+    image: {
+        marginTop: 15,
+        width: 150,
+        height: 150,
+        borderColor: "rgba(0,0,0,0.2)",
+        borderWidth: 3,
+        borderRadius: 150
+    }
+})
