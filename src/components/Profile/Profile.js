@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, Image, View } from 'react-native';
-import SuggestedTreat from '../../containers/SuggestedTreat/SuggestedTreat';
+import SuggestedTreat from '../../containers/suggestedTreat/SuggestedTreat';
 
 export default function Profile(props) {
     //need to fetch all activities for a user, and map over them adding suggesteTreats for each
