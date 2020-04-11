@@ -3,9 +3,10 @@ import { StyleSheet, View } from 'react-native';
 // import Landing from './src/components/Landing/Landing';
 // import Profile from './src/components/Profile/Profile';
 import Login from '../../containers/Login/Login';
-import { NativeRouter, Route } from "react-router-native";
+import { Route } from "react-router-native";
+import { NativeRouter } from "react-router-native";
 
-export default function App() {
+export default function App() {  
   return (
     <NativeRouter>
       <View style={styles.container}>
@@ -15,6 +16,8 @@ export default function App() {
     </NativeRouter>
   );
 }
+
+// AppRegistry.registerComponent('MyApplication', () => App);
 
 const styles = StyleSheet.create({
   container: {
