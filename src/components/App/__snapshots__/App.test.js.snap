@@ -17,11 +17,24 @@ exports[`<App /> renders correctly 1`] = `
         "alignItems": "center",
         "backgroundColor": "#fff",
         "flex": 1,
-        "justifyContent": "center",
+        "justifyContent": "space-around",
+        "margin": 50,
+        "width": 300,
       }
     }
   >
-    <View>
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+          "backgroundColor": "#fff",
+          "flex": 1,
+          "justifyContent": "space-around",
+          "margin": 50,
+          "width": 300,
+        }
+      }
+    >
       <Image
         source={1}
         style={
@@ -31,9 +44,6 @@ exports[`<App /> renders correctly 1`] = `
           }
         }
       />
-      <Text>
-        An app where you can treat yourself to some personal time, guilt free.
-      </Text>
       <Text
         style={
           Object {
@@ -41,7 +51,10 @@ exports[`<App /> renders correctly 1`] = `
           }
         }
       >
-        Sign In With Google
+        Treat Yo Self
+      </Text>
+      <Text>
+        An app where you can treat yourself to some personal time, guilt free.
       </Text>
       <View
         accessibilityRole="button"
