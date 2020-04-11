@@ -3,22 +3,42 @@ import { StyleSheet, Text, Image, View, Button } from 'react-native';
 import * as Google from 'expo-google-app-auth';
 import Profile from '../../components/Profile/Profile';
 // import Landing from '../Landing/Landing';
-
+import { gql } from 'apollo-boost';
+import { useQuery } from '@apollo/react-hooks';
 
 export default function Login() {
     const [userDetails, setUserDetails] = useState({});
     const [signedIn, setSignIn] = useState(false);
+
+    // function ShowingSomeErrors() {
+    //     const myQuery = gql`
+    //     {
+    //       getCategories {
+    //         name
+    //       }
+    //     }
+    //   `;
+
+    //     const { error, data } = useQuery(myQuery, { errorPolicy: 'all' });
+    //     console.log('errors', error)
+    //     console.log('data', data)
+    //     // error.graphQLErrors.map(({ message }, i) => (
+    //     //     console.log(message)
+    //     // ))
+    // }
+    // ShowingSomeErrors()
 
     signIn = async () => {
         try {
             const result = await Google.logInAsync({
                 androidClientId:
                     "842486829242-mq0e6d5lpsql7l9u41o4cclaqprpsbjp.apps.googleusercontent.com",
-                scopes: ["profile", "email", "https://www.googleapis.com/auth/calendar.events"]
+                scopes: ["profile", "email", "https://www.googleapis.com/auth/calendar.events", "https://www.googleapis.com/auth/calendar"]
             })
 
             if (result.type === "success") {
                 setUserDetails(result)
+                console.log(result)
                 setSignIn(true)
             } else {
                 console.log("Login Cancelled")
@@ -42,10 +62,10 @@ export default function Login() {
 
 const LoginPage = props => {
     return (
-        <View>
+        <View style={styles.container}>
             <Image source={require("../../../assets/logo.png")} style={{ width: 200, height: 200 }} />
+            <Text style={styles.header}>Treat Yo Self</Text>
             <Text>An app where you can treat yourself to some personal time, guilt free.</Text>
-            <Text style={styles.header}>Sign In With Google</Text>
             <Button title="Sign in with Google" onPress={() => props.signIn()} />
         </View>
     )
@@ -65,7 +85,9 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: "#fff",
         alignItems: "center",
-        justifyContent: "center"
+        justifyContent: "space-around",
+        margin: 50,
+        width: 300
     },
     header: {
         fontSize: 25
