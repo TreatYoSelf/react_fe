@@ -11,9 +11,9 @@ import {
 import Drawer from "react-native-drawer";
 import NavBarItems from "./NavBarItems";
 import { withNavigation } from "react-navigation";
-import menu from "../assets/icons/navBar/menu.png";
-import menuClosed from "../assets/icons/navBar/x.png";
-import home from "../assets/icons/navBar/home.png";
+import menu from "../../../assets/icons/navBar/menu.png";
+import menuClosed from "../../../assets/icons/navBar/x.png";
+import home from "../../../assets/icons/navBar/home.png";
 
 export default class NavBar extends Component {
   constructor() {

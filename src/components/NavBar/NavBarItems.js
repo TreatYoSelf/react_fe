@@ -7,7 +7,7 @@ import {
   TouchableOpacity,
   Image
 } from "react-native";
-import Colors from "../constants/Colors";
+import Colors from "../../../constants/Colors";
 import { useNavigation } from "@react-navigation/native";
 
 export default function NavBarItems({ closeMenu, action }) {
