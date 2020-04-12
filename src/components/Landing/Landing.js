@@ -3,10 +3,9 @@ import { StyleSheet, Text, Image, View, Button } from 'react-native';
 
 export default function Landing(props) {
     return (
-        <View>
+        <View style={styles.view}>
             <Image source={require("../../../assets/logo.png")} style={{ width: 200, height: 200 }} />
-            <Text>An app where you can treat yourself to some personal time, guilt free.</Text>
-            <Text style={styles.header}>Sign In With Google</Text>
+            <Text style={styles.header}>An app where you can treat yourself to some personal time, guilt free.</Text>
             <Button title="Sign in with Google" onPress={() => props.signIn()} />
         </View>
     );
@@ -19,10 +18,17 @@ const styles = StyleSheet.create({
         alignItems: "center",
         justifyContent: "center"
     },
+    view: {
+      display: 'flex',
+      alignItems: 'center'
+    },
     header: {
-        fontSize: 25
+      fontFamily: "Baskerville",
+      fontWeight: "normal",
+      fontSize: 25
     },
     image: {
+        align: "center",
         marginTop: 15,
         width: 150,
         height: 150,
