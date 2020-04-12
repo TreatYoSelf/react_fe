@@ -22,4 +22,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  baseText: {
+    fontFamily: "Baskerville"
+    },
+    titleText: {
+    fontSize: 20,
+    fontWeight: "bold"
+  }
 });
