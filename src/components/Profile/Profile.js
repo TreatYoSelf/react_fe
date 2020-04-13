@@ -7,7 +7,7 @@ import { useQuery } from '@apollo/react-hooks';
 export default function Profile(props) {
     //need to fetch all activities for a user, and map over them adding suggesteTreats for each
     //temporarily load SuggestedTreat
-    let catDisplay = [];
+    let catDisplay, selectedCategories = [];
     const myQuery = gql`
         {
           getCategories {
@@ -17,17 +17,23 @@ export default function Profile(props) {
       `;
 
     const { error, data } = useQuery(myQuery, { errorPolicy: 'all' });
+    //need to error display
     // if (error) {
     //     setErrors(error)
     // }
+
+    const selectCategory = (category) => {
+        if (selectedCategories.length < 3) {
+            selectedCategories.push(category)
+            console.log(selectedCategories)
+        }
+    }
+
+    //render fetched categories
     if (data) {
         catDisplay = data.getCategories.map((category, i) =>
-        <SuggestedTreat key={i} title={category.name} />)
+            <SuggestedTreat key={i} title={category.name} selectCategory={selectCategory} />)
     }
-    //need to error display
-  
-    // console.log('hit', categories)
-
 
     return (
         <View style={styles.container}>
