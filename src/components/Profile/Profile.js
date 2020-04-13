@@ -5,8 +5,6 @@ import { gql } from 'apollo-boost';
 import { useQuery } from '@apollo/react-hooks';
 
 export default function Profile(props) {
-    //need to fetch all activities for a user, and map over them adding suggesteTreats for each
-    //temporarily load SuggestedTreat
     let catDisplay, selectedCategories = [];
     const myQuery = gql`
         {
@@ -36,26 +34,25 @@ export default function Profile(props) {
         }
     }
 
-    //render fetched categories
+    //add a selected property to each data item before passing through to flatList
+    //make selectCategory toggle that selected boolean
+    //conditionally style each treat based on that to say if selected or not
+    //use that check to remove from selected array if true and clicked
+
     if (data) {
-        catDisplay = data.getCategories.map((category, i) =>
-            <SuggestedTreat key={i} title={category.name} selectCategory={selectCategory} />)
+        catDisplay = <FlatList
+            data={data.getCategories}
+            renderItem={({ item, index }) => (
+                <SuggestedTreat key={index} title={item.name} selectCategory={selectCategory} />
+            )}
+        />
     }
 
     return (
         <View style={styles.container}>
             <Text style={styles.header}>Welcome:{props.name}</Text>
             <Image style={styles.image} source={{ uri: props.photoUrl }} />
-            <ScrollView style={styles.categories}>
-                {catDisplay}
-            </ScrollView>
-            {/* <FlatList
-                data={data.getCategories}
-                ref={e => (this.items = e)}
-                renderItem={({ category, i }) => (
-                    <SuggestedTreat key={i} title={category.name} selectCategory={selectCategory} />
-                )}
-            /> */}
+            {catDisplay}
             <TouchableOpacity style={styles.container} onPress={() => submitSelection()}>
                 <Text style={styles.header}>Submit</Text>
             </TouchableOpacity>
