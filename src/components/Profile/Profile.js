@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, Text, Image, View, ScrollView, FlatList } from 'react-native';
+import { StyleSheet, Text, Image, View, ScrollView, FlatList, TouchableOpacity } from 'react-native';
 import SuggestedTreat from '../../containers/suggestedTreat/SuggestedTreat';
 import { gql } from 'apollo-boost';
 import { useQuery } from '@apollo/react-hooks';
@@ -22,9 +22,16 @@ export default function Profile(props) {
     //     setErrors(error)
     // }
 
+    //this needs to be refactored to a toggle.
+    //store as object for easy removal 
     const selectCategory = (category) => {
         if (selectedCategories.length < 3) {
             selectedCategories.push(category)
+        }
+    }
+
+    const submitSelection = () => {
+        if (selectedCategories.length === 3) {
             console.log(selectedCategories)
         }
     }
@@ -42,6 +49,16 @@ export default function Profile(props) {
             <ScrollView style={styles.categories}>
                 {catDisplay}
             </ScrollView>
+            {/* <FlatList
+                data={data.getCategories}
+                ref={e => (this.items = e)}
+                renderItem={({ category, i }) => (
+                    <SuggestedTreat key={i} title={category.name} selectCategory={selectCategory} />
+                )}
+            /> */}
+            <TouchableOpacity style={styles.container} onPress={() => submitSelection()}>
+                <Text style={styles.header}>Submit</Text>
+            </TouchableOpacity>
         </View>
     );
 }
