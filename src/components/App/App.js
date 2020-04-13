@@ -6,7 +6,7 @@ import Login from '../../containers/Login/Login';
 import { Route } from "react-router-native";
 import { NativeRouter } from "react-router-native";
 
-export default function App() {  
+export default function App() {
   return (
     <NativeRouter>
       <View style={styles.container}>
@@ -22,7 +22,7 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#b6bfac',
     alignItems: 'center',
     justifyContent: 'center',
   },
