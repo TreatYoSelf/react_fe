@@ -23,8 +23,8 @@ const styles = StyleSheet.create({
       alignItems: 'center'
     },
     header: {
-      fontFamily: "Baskerville",
-      fontWeight: "normal",
+      fontFamily: "Noteworthy",
+      fontWeight: "bold",
       fontSize: 25
     },
     image: {

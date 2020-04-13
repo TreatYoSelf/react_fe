@@ -23,7 +23,9 @@ const styles = StyleSheet.create({
         justifyContent: "center"
     },
     header: {
-        fontSize: 25
+      fontFamily: "Noteworthy",
+      fontWeight: "normal",
+      fontSize: 25
     },
     image: {
         marginTop: 15,
