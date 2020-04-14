@@ -13,5 +13,21 @@ export const mockTreatSched = {
     duration: ''
 }
 
+export const mockEvents = [{
+        "eventName": "Hike",
+            "eventStartTime": "2020-04-13 13:31:31 -0700",
+            "eventEndTime": "2020-04-13 14:31:31 -0700"
+    },
+    {
+        "eventName": "Spa Day",
+            "eventStartTime": "2020-04-14 13:31:31 -0700",
+            "eventEndTime": "2020-04-14 14:31:31 -0700"
+    },
+    {
+        "eventName": "Yoga",
+            "eventStartTime": "2020-04-14 13:31:31 -0700",
+            "eventEndTime": "2020-04-14 14:31:31 -0700"
+    }];
+
 //have one task that's scheduled
 //have one task that's just a potential 
