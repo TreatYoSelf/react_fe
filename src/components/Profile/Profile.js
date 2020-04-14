@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, Image, View, ScrollView, FlatList, TouchableOpacity } from 'react-native';
-import SuggestedTreat from '../../containers/suggestedTreat/SuggestedTreat';
+import TreatSelector from '../../containers/TreatSelector/TreatSelector';
 import { gql } from 'apollo-boost';
 import { useQuery } from '@apollo/react-hooks';
 
 export default function Profile(props) {
-    let catDisplay, selectedCategories = [];
-    const myQuery = gql`
+    let catDisplay, selectableCategories = [];
+    let selectedCategories = {};
+    const fetchCategories = gql`
         {
           getCategories {
             name
@@ -14,7 +15,7 @@ export default function Profile(props) {
         }
       `;
 
-    const { error, data } = useQuery(myQuery, { errorPolicy: 'all' });
+    const { error, data } = useQuery(fetchCategories, { errorPolicy: 'all' });
     //need to error display
     // if (error) {
     //     setErrors(error)
@@ -22,15 +23,31 @@ export default function Profile(props) {
 
     //this needs to be refactored to a toggle.
     //store as object for easy removal 
-    const selectCategory = (category) => {
-        if (selectedCategories.length < 3) {
-            selectedCategories.push(category)
+
+    //create toggle as two separate tasks. 
+        //one should go through and as long as 
+    const selectCategory = (category, id) => {
+        console.log('selectedCat', category)
+        console.log('selectedID', id)
+        if (selectableCategories[id].isSelect) {
+            selectableCategories[id].isSelect = false;
+            delete selectedCategories[id];
+        } else if (Object.keys(selectedCategories).length < 3) {
+            selectedCategories[id] = category;   
+            selectableCategories[id].isSelect = true;
         }
+        console.log(selectableCategories)
     }
 
     const submitSelection = () => {
         if (selectedCategories.length === 3) {
-            console.log(selectedCategories)
+            const fetchCategories = gql`
+            {
+                getCategories {
+                    name
+                }
+            }
+            `;
         }
     }
 
@@ -39,11 +56,22 @@ export default function Profile(props) {
     //conditionally style each treat based on that to say if selected or not
     //use that check to remove from selected array if true and clicked
 
+    //we'll need to store in state to do the flatlist re-render
+    //otherwise 
+
     if (data) {
+        selectableCategories = data.getCategories.map((category, index) => {
+            return {
+                id: index,
+                isSelect:false,
+                ...category
+            }
+        })
+
         catDisplay = <FlatList
-            data={data.getCategories}
-            renderItem={({ item, index }) => (
-                <SuggestedTreat key={index} title={item.name} selectCategory={selectCategory} />
+            data={selectableCategories}
+            renderItem={({ item }) => (
+                <TreatSelector key={item.id} id={item.id} title={item.name} style={item.isSelect ? 'selected' : ''} selectCategory={selectCategory} />
             )}
         />
     }
