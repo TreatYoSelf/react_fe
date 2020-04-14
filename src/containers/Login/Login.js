@@ -8,6 +8,19 @@ export default function Login() {
     const [userDetails, setUserDetails] = useState({});
     const [signedIn, setSignIn] = useState(false);
 
+    const registerUser = (userDetails) => {
+        const options = {
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            method: "POST",
+            body: JSON.stringify(userDetails)
+        }   
+
+        fetch('https://treat-yo-self-bjtw.herokuapp.com', options)
+            .catch(err => console.log(err))
+    }
+
     signIn = async () => {
         try {
             const result = await Google.logInAsync({
