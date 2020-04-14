@@ -3,30 +3,10 @@ import { StyleSheet, Text, Image, View, Button } from 'react-native';
 import * as Google from 'expo-google-app-auth';
 import Profile from '../../components/Profile/Profile';
 // import Landing from '../Landing/Landing';
-import { gql } from 'apollo-boost';
-import { useQuery } from '@apollo/react-hooks';
 
 export default function Login() {
     const [userDetails, setUserDetails] = useState({});
     const [signedIn, setSignIn] = useState(false);
-
-    // function ShowingSomeErrors() {
-    //     const myQuery = gql`
-    //     {
-    //       getCategories {
-    //         name
-    //       }
-    //     }
-    //   `;
-
-    //     const { error, data } = useQuery(myQuery, { errorPolicy: 'all' });
-    //     console.log('errors', error)
-    //     console.log('data', data)
-    //     // error.graphQLErrors.map(({ message }, i) => (
-    //     //     console.log(message)
-    //     // ))
-    // }
-    // ShowingSomeErrors()
 
     signIn = async () => {
         try {
@@ -38,7 +18,6 @@ export default function Login() {
 
             if (result.type === "success") {
                 setUserDetails(result)
-                console.log(result)
                 setSignIn(true)
             } else {
                 console.log("Login Cancelled")

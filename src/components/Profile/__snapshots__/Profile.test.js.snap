@@ -6,8 +6,6 @@ exports[`<Profile /> renders correctly 1`] = `
     Object {
       "alignItems": "center",
       "backgroundColor": "#fff",
-      "flex": 1,
-      "justifyContent": "center",
     }
   }
 >
@@ -38,51 +36,33 @@ exports[`<Profile /> renders correctly 1`] = `
     }
   />
   <View
+    accessible={true}
+    focusable={true}
+    isTVSelectable={true}
+    onClick={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
     style={
       Object {
         "alignItems": "center",
         "backgroundColor": "#fff",
-        "flex": 1,
-        "justifyContent": "center",
+        "opacity": 1,
       }
     }
   >
-    <Image
-      source={1}
+    <Text
       style={
         Object {
-          "height": 200,
-          "width": 200,
-        }
-      }
-    />
-    <Text>
-      Frolic
-    </Text>
-    <View
-      style={
-        Object {
-          "height": 50,
-          "width": 150,
+          "fontSize": 25,
         }
       }
     >
-      <RCTPicker
-        items={Array []}
-        onChange={[Function]}
-        onResponderTerminationRequest={[Function]}
-        onStartShouldSetResponder={[Function]}
-        selectedIndex={0}
-        style={
-          Array [
-            Object {
-              "height": 216,
-            },
-            undefined,
-          ]
-        }
-      />
-    </View>
+      Submit
+    </Text>
   </View>
 </View>
 `;
