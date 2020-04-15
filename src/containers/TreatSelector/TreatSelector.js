@@ -11,11 +11,6 @@ export default function TreatSelector({ id, title, selectCategory, style }) {
             {/* <Image source={require(`../../../assets/${iconName}.png`)} style={{ width: 200, height: 200 }} /> */}
             <Image source={require(`../../../assets/icons/categories/outdoors.png`)} style={{ width: 50, height: 50 }} />
             <Text style={styles.header}>{title}</Text>
-            {/* <Picker
-                selectedValue={rating}
-                style={{ height: 50, width: 150 }}
-                onValueChange={(itemValue, itemIndex) => setRating(itemValue)}
-            /> */}
         </TouchableOpacity>
     );
 }
@@ -23,7 +18,6 @@ export default function TreatSelector({ id, title, selectCategory, style }) {
 const styles = StyleSheet.create({
     container: {
         // flex: 1,
-        backgroundColor: '#fff',
         alignItems: 'center',
         justifyContent: 'space-around',
         flexDirection: 'row',
@@ -31,6 +25,7 @@ const styles = StyleSheet.create({
         padding: 10,
         backgroundColor: "honeydew",
         borderWidth: 5,
+        borderColor: '#003045'
     },
     header: {
         fontWeight: 'bold'
