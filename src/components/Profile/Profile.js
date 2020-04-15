@@ -1,96 +1,46 @@
-import React, { useEffect, useState } from 'react';
-import { StyleSheet, Text, Image, View, ScrollView, FlatList, TouchableOpacity } from 'react-native';
-import TreatSelector from '../../containers/TreatSelector/TreatSelector';
-import { gql } from 'apollo-boost';
-import { useQuery } from '@apollo/react-hooks';
+import React, { useState } from 'react';
+import { StyleSheet, Text, Image, View } from 'react-native';
+import PreferenceForm from '../../containers/PreferenceForm/PreferenceForm';
 
 export default function Profile(props) {
-    let catDisplay, selectableCategories = [];
-    let selectedCategories = {};
-    const fetchCategories = gql`
-        {
-          getCategories {
-            name
-          }
+    const [preferences, setPreference] = useState([]);
+
+    //need a button that redirects to PreferenceForm
+    //pass through state to set preference on submit
+    //on submit of preference reroutes to profile
+    //dynamically display button based on preference 
+    //make graphQL post here 
+
+    const postPreferences = () => {
+        const options = {
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            method: "POST",
+            body: JSON.stringify(preferences)
         }
-      `;
 
-    const { error, data } = useQuery(fetchCategories, { errorPolicy: 'all' });
-    //need to error display
-    // if (error) {
-    //     setErrors(error)
-    // }
-
-    //this needs to be refactored to a toggle.
-    //store as object for easy removal 
-
-    //create toggle as two separate tasks. 
-        //one should go through and as long as 
-    const selectCategory = (category, id) => {
-        console.log('selectedCat', category)
-        console.log('selectedID', id)
-        if (selectableCategories[id].isSelect) {
-            selectableCategories[id].isSelect = false;
-            delete selectedCategories[id];
-        } else if (Object.keys(selectedCategories).length < 3) {
-            selectedCategories[id] = category;   
-            selectableCategories[id].isSelect = true;
-        }
-        console.log(selectableCategories)
-    }
-
-    const submitSelection = () => {
-        if (selectedCategories.length === 3) {
-            const fetchCategories = gql`
-            {
-                getCategories {
-                    name
-                }
-            }
-            `;
-        }
-    }
-
-    //add a selected property to each data item before passing through to flatList
-    //make selectCategory toggle that selected boolean
-    //conditionally style each treat based on that to say if selected or not
-    //use that check to remove from selected array if true and clicked
-
-    //we'll need to store in state to do the flatlist re-render
-    //otherwise 
-
-    if (data) {
-        selectableCategories = data.getCategories.map((category, index) => {
-            return {
-                id: index,
-                isSelect:false,
-                ...category
-            }
-        })
-
-        catDisplay = <FlatList
-            data={selectableCategories}
-            renderItem={({ item }) => (
-                <TreatSelector key={item.id} id={item.id} title={item.name} style={item.isSelect ? 'selected' : ''} selectCategory={selectCategory} />
-            )}
-        />
+        fetch('https://treat-yo-self-bjtw.herokuapp.com/api/v1/suggestions ', options)
+            .then(resp => resp.json())
+            .then(data => console.log(data))
+            .catch(err => console.log(err))
     }
 
     return (
         <View style={styles.container}>
-            <Text style={styles.header}>Welcome:{props.name}</Text>
+            <Text style={styles.header}>Welcome {props.name}</Text>
             <Image style={styles.image} source={{ uri: props.photoUrl }} />
-            {catDisplay}
-            <TouchableOpacity style={styles.container} onPress={() => submitSelection()}>
-                <Text style={styles.header}>Submit</Text>
-            </TouchableOpacity>
+            {preferences.length ? (
+                <Button />
+            ) : (
+                <PreferenceForm setPreference={setPreference} />
+                )}
         </View>
     );
 }
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: "#fff",
         alignItems: "center",
         // justifyContent: "space-between",
         // height: 40,
