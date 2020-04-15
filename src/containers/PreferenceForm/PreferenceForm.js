@@ -4,18 +4,19 @@ import TreatSelector from '../../containers/TreatSelector/TreatSelector';
 import { gql } from 'apollo-boost';
 import { useQuery } from '@apollo/react-hooks';
 
+export const FETCH_CATEGORIES = gql`
+    {
+      getCategories {
+        name
+      }
+    }
+  `;
+
 export default function PreferenceForm({setPreference}) {
     let catDisplay, allCategories = [];
     let selectedCategories = {};
-    const fetchCategories = gql`
-        {
-          getCategories {
-            name
-          }
-        }
-      `;
 
-    const { error, data } = useQuery(fetchCategories, { errorPolicy: 'all' });
+    const { error, data } = useQuery(FETCH_CATEGORIES, { errorPolicy: 'all' });
     //need to error display
     // if (error) {
     //     setErrors(error)
@@ -29,8 +30,6 @@ export default function PreferenceForm({setPreference}) {
 
     //fix up naming convention here 
     const selectCategory = (category, id) => {
-        console.log('selectedCat', category)
-        console.log('selectedID', id)
         if (allCategories[id].isSelect) {
             allCategories[id].isSelect = false;
             delete selectedCategories[id];
@@ -38,7 +37,6 @@ export default function PreferenceForm({setPreference}) {
             selectedCategories[id] = category;
             allCategories[id].isSelect = true;
         }
-        console.log(allCategories)
     }
 
     const submitSelection = () => {

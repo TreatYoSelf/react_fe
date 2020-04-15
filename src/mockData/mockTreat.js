@@ -13,6 +13,41 @@ export const mockTreatSched = {
     duration: ''
 }
 
+export const mockCategories = {
+    getCategories: [
+        {
+            "name": "Outdoor",
+        },
+        {
+            "name": "Beauty",
+        },
+        {
+            "name": "Exercise",
+        },
+        {
+            "name": "Home",
+        },
+        {
+            "name": "Organizing",
+        },
+        {
+            "name": "Food",
+        },
+        {
+            "name": "Mindfulness",
+        },
+        {
+            "name": "Group",
+        },
+        {
+            "name": "Event",
+        },
+        {
+            "name": "Enrichment",
+        },
+    ]
+}
+
 export const mockEvents = [{
         "eventName": "Hike",
             "eventStartTime": "1394648309130.185",

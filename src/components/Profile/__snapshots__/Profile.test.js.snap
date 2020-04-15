@@ -5,7 +5,6 @@ exports[`<Profile /> renders correctly 1`] = `
   style={
     Object {
       "alignItems": "center",
-      "backgroundColor": "#fff",
     }
   }
 >
@@ -16,7 +15,7 @@ exports[`<Profile /> renders correctly 1`] = `
       }
     }
   >
-    Welcome:
+    Welcome 
   </Text>
   <Image
     source={
@@ -36,21 +35,9 @@ exports[`<Profile /> renders correctly 1`] = `
     }
   />
   <View
-    accessible={true}
-    focusable={true}
-    isTVSelectable={true}
-    onClick={[Function]}
-    onResponderGrant={[Function]}
-    onResponderMove={[Function]}
-    onResponderRelease={[Function]}
-    onResponderTerminate={[Function]}
-    onResponderTerminationRequest={[Function]}
-    onStartShouldSetResponder={[Function]}
     style={
       Object {
         "alignItems": "center",
-        "backgroundColor": "#fff",
-        "opacity": 1,
       }
     }
   >
@@ -61,8 +48,36 @@ exports[`<Profile /> renders correctly 1`] = `
         }
       }
     >
-      Submit
+      What activities you're interested in?
     </Text>
+    <View
+      accessible={true}
+      focusable={true}
+      isTVSelectable={true}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "alignItems": "center",
+          "opacity": 1,
+        }
+      }
+    >
+      <Text
+        style={
+          Object {
+            "fontSize": 25,
+          }
+        }
+      >
+        Submit
+      </Text>
+    </View>
   </View>
 </View>
 `;

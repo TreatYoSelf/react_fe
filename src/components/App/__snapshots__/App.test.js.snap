@@ -4,10 +4,11 @@ exports[`<App /> renders correctly 1`] = `
 <View
   style={
     Object {
-      "alignItems": "center",
-      "backgroundColor": "#fff",
+      "backgroundColor": "#b6bfac",
       "flex": 1,
-      "justifyContent": "space-around",
+      "flexDirection": "column",
+      "height": "100%",
+      "justifyContent": "center",
     }
   }
 >
@@ -15,7 +16,6 @@ exports[`<App /> renders correctly 1`] = `
     style={
       Object {
         "alignItems": "center",
-        "backgroundColor": "#fff",
         "flex": 1,
         "justifyContent": "space-around",
         "margin": 50,
@@ -27,7 +27,6 @@ exports[`<App /> renders correctly 1`] = `
       style={
         Object {
           "alignItems": "center",
-          "backgroundColor": "#fff",
           "flex": 1,
           "justifyContent": "space-around",
           "margin": 50,
