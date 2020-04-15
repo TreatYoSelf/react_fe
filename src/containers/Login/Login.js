@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, Image, View, Button } from 'react-native';
+import { StyleSheet, Text, Image, View, Button, AsyncStorage } from 'react-native';
 import * as Google from 'expo-google-app-auth';
 import Profile from '../../components/Profile/Profile';
-// import Landing from '../Landing/Landing';
+import PreferenceForm from '../PreferenceForm/PreferenceForm';
+import { mockUser } from '../../mockData/mockTreat';
+mockUser
 
 export default function Login() {
-    const [userDetails, setUserDetails] = useState({});
-    const [signedIn, setSignIn] = useState(false);
+    const [signedIn, setSignIn] = useState(true);
 
     const registerUser = ({user: {givenName, familyName, email}, accessToken, refreshToken}) => {
         const options = {
@@ -23,13 +24,22 @@ export default function Login() {
             })
         }   
 
-        fetch('https://treat-yo-self-bjtw.herokuapp.com/api/v1/users', options)
-            .then(resp => resp.json())
-            .then(data => console.log(data))
-            .catch(err => console.log(err))
+        // fetch('https://treat-yo-self-bjtw.herokuapp.com/api/v1/users', options)
+        //     .then(resp => resp.json())
+        //     .then(data => console.log(data))
+        //     .catch(err => console.log(err))
     }
 
-    signIn = async () => {
+    const saveUserDetails = async details => {
+        try {
+            const userToStore = await JSON.stringify(details)
+            await AsyncStorage.setItem('user', mockUser);
+        } catch (error) {
+            console.log(error.message);
+        }
+    };
+
+    const signIn = async () => {
         try {
             const result = await Google.logInAsync({
                 androidClientId:
@@ -38,8 +48,8 @@ export default function Login() {
             })
 
             if (result.type === "success") {
-                // registerUser(result)
-                setUserDetails(result)
+                registerUser(result)
+                saveUserDetails(result)
                 setSignIn(true)
             } else {
                 console.log("Login Cancelled")
@@ -52,9 +62,9 @@ export default function Login() {
     return (
         <View style={styles.container}>
             {signedIn ? (
-                <Profile name={userDetails.user.givenName} photoUrl={userDetails.user.photoUrl} />
+                <PreferenceForm />
             ) : (
-                <LoginPage signIn={this.signIn} />
+                <LoginPage signIn={signIn} />
                 // <Landing signIn={this.signIn}/>
                 )}
         </View>
