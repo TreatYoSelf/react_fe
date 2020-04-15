@@ -1,40 +1,52 @@
-import React, { useState } from 'react';
-import { StyleSheet, Text, Image, View } from 'react-native';
-import PreferenceForm from '../../containers/PreferenceForm/PreferenceForm';
+import React, { useEffect, useState } from 'react';
+import { StyleSheet, Text, Image, View, TouchableOpacity, ActivityIndicator, AsyncStorage } from 'react-native';
+import { Link } from "react-router-native";
 
-export default function Profile(props) {
-    const [preferences, setPreference] = useState([]);
+export default function Profile() {
+    const [user, setUser] = useState({ name: '', photoUrl: '' });
+    const [userReturned, fetchUser] = useState(false);
 
-    //need a button that redirects to PreferenceForm
-    //pass through state to set preference on submit
-    //on submit of preference reroutes to profile
-    //dynamically display button based on preference 
-    //make graphQL post here 
+    useEffect(() => {
+        getUserDetails();
+    }, [])
 
-    const postPreferences = () => {
-        const options = {
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            method: "POST",
-            body: JSON.stringify(preferences)
+    const getUserDetails = async () => {
+        try {
+            const storedUser = await AsyncStorage.getItem('user');
+            const parsedUser = await JSON.parse(storedUser)
+            if(!userReturned) {
+                setUser(parsedUser.user)
+                fetchUser(true)
+            }
+        } catch (error) {
+            console.log(error.message);
         }
-
-        fetch('https://treat-yo-self-bjtw.herokuapp.com/api/v1/suggestions ', options)
-            .then(resp => resp.json())
-            .then(data => console.log(data))
-            .catch(err => console.log(err))
     }
 
+    const generateEvents = () => {
+        console.log('hit')
+        // fetch('https://treat-yo-self-bjtw.herokuapp.com/api/v1/suggestions')
+        //     .then(resp => resp.json())
+        //     .then(data => console.log(data))
+        //     .catch(err => console.log(err))
+        }
+
     return (
-        <View style={styles.container}>
-            <Text style={styles.header}>Welcome {props.name}</Text>
-            <Image style={styles.image} source={{ uri: props.photoUrl }} />
-            {preferences.length ? (
-                <Button />
+        <View>
+            {user.name ? (
+                <View style={styles.container}>
+                    <Text style={styles.header}>Welcome {user.givenName}</Text>
+                    <Image style={styles.image} source={{ uri: user.photoUrl }} />
+                    <Link to="/calendar" style={styles.button} >   
+                        <Text>View Calendar</Text>
+                    </Link>
+                    <TouchableOpacity style={styles.button} onPress={() => generateEvents()}>
+                        <Text>Treat Yo Self!</Text>
+                    </TouchableOpacity>
+                </View>
             ) : (
-                <PreferenceForm setPreference={setPreference} />
-                )}
+                <ActivityIndicator />
+            )}
         </View>
     );
 }
@@ -42,7 +54,7 @@ export default function Profile(props) {
 const styles = StyleSheet.create({
     container: {
         alignItems: "center",
-        // justifyContent: "space-between",
+        justifyContent: "space-around",
         // height: 40,
         // width: 100
     },
@@ -62,5 +74,14 @@ const styles = StyleSheet.create({
         flexGrow: 0,
         // height: 60
         // width: 100
+    },
+    button: {
+        alignItems: 'center',
+        justifyContent: 'space-around',
+        flexDirection: 'row',
+        width: 300,
+        padding: 10,
+        backgroundColor: "honeydew",
+        borderWidth: 5,
     }
 })
