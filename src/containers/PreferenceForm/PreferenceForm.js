@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { StyleSheet, Text, View, FlatList, TouchableOpacity } from 'react-native';
 import TreatSelector from '../../containers/TreatSelector/TreatSelector';
 import { gql } from 'apollo-boost';
 import { useQuery } from '@apollo/react-hooks';
+import { Link } from "react-router-native";
 
 export const FETCH_CATEGORIES = gql`
     {
@@ -12,9 +13,10 @@ export const FETCH_CATEGORIES = gql`
     }
   `;
 
-export default function PreferenceForm({setPreference}) {
+export default function PreferenceForm() {
     let catDisplay, allCategories = [];
     let selectedCategories = {};
+    const [selectedStatus, setSelectionStatus] = useState(false);
 
     const { error, data } = useQuery(FETCH_CATEGORIES, { errorPolicy: 'all' });
     //need to error display
@@ -29,6 +31,21 @@ export default function PreferenceForm({setPreference}) {
     //one should go through and as long as 
 
     //fix up naming convention here 
+    const postPreferences = (chosenCat) => {
+        const options = {
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            method: "POST",
+            body: JSON.stringify(chosenCat)
+        }
+
+        // fetch('https://treat-yo-self-bjtw.herokuapp.com/api/v1/suggestions', options)
+        //     .then(resp => resp.json())
+        //     .then(data => console.log('preferences posted'))
+        //     .catch(err => console.log(err))
+    }
+
     const selectCategory = (category, id) => {
         if (allCategories[id].isSelect) {
             allCategories[id].isSelect = false;
@@ -36,28 +53,30 @@ export default function PreferenceForm({setPreference}) {
         } else if (Object.keys(selectedCategories).length < 3) {
             selectedCategories[id] = category;
             allCategories[id].isSelect = true;
+            if (Object.keys(selectedCategories).length === 3) {
+                setSelectionStatus(true)
+            }
         }
     }
 
     const submitSelection = () => {
-        if (selectedCategories.length === 3) {
-            setPreference(Object.keys(selectedCategories))
+            console.log('hit')
+            // postPreferences(Object.keys(selectedCategories))
             //navigate back to profile also 
-        }
         //if failed submit error message
     }
 
     if (data) {
         allCategories = data.getCategories.map((category, index) => {
             return {
-                id: index,
+                id: index.toString(),
                 isSelect: false,
                 ...category
             }
         })
 
         catDisplay = <FlatList
-            data={selectableCategories}
+            data={allCategories}
             renderItem={({ item }) => (
                 <TreatSelector key={item.id} id={item.id} title={item.name} style={item.isSelect ? 'selected' : ''} selectCategory={selectCategory} />
             )}
@@ -66,11 +85,14 @@ export default function PreferenceForm({setPreference}) {
 
     return (
         <View style={styles.container}>
-            <Text style={styles.header}>What activities you're interested in?</Text>
+            <Text style={styles.header}>What types of activities are you interested in?</Text>
             {catDisplay}
-            <TouchableOpacity style={styles.container} onPress={() => submitSelection()}>
-                <Text style={styles.header}>Submit</Text>
-            </TouchableOpacity>
+            {selectedStatus && <TouchableOpacity style={styles.button} onPress={() => submitSelection()} disabled={selectedStatus ? false : true}>
+                <Text>Submit Choices</Text>
+            </TouchableOpacity>}
+            <Link to="/profile" style={styles.button}>
+                <Text>Profile</Text>
+            </Link>
         </View>
     );
 }
@@ -84,6 +106,7 @@ const styles = StyleSheet.create({
     },
     header: {
         fontSize: 25,
+        color: '#003045'
     },
     image: {
         marginTop: 15,
@@ -98,5 +121,14 @@ const styles = StyleSheet.create({
         flexGrow: 0,
         // height: 60
         // width: 100
+    },
+    button: {
+        alignItems: 'center',
+        justifyContent: 'space-around',
+        flexDirection: 'row',
+        width: 300,
+        padding: 10,
+        backgroundColor: "honeydew",
+        borderWidth: 5,
     }
 })
