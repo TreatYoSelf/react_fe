@@ -1,24 +1,30 @@
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, View, SectionList } from 'react-native';
 import TreatEvent from './TreatEvent';
-// import { gql } from 'apollo-boost';
-// import { useQuery } from '@apollo/react-hooks';
 import { mockEvents } from '../../mockData/mockTreat';
 
 export default function Calendar() {
-    //do calcs here to group into a single date object 
-    //dont need to parse float just JSON parse on fetch 
+    const [calendar, setCal] = useState(mockEvents);
+    const [calReturned, fetchCal] = useState(false);
 
-    //abstract these to helpers 
+    useEffect(() => {
+        // fetchEvents();
+    }, [])
+
     const fetchEvents = () => {
         fetch('https://treat-yo-self-bjtw.herokuapp.com/api/v1/users/events')
             .then(resp => resp.json())
-            .then(data => console.log('fetchedEvt', data))
+            .then(data => {
+                console.log('calData', data)
+                if (!calReturned) {
+                    setCal(data)
+                    fetchCal(true)
+                }
+            })
             .catch(err => console.log(err))
     }
-    fetchEvents()
 
-    const calendarEvents = mockEvents.reduce((eventByDay, event) => {
+    const calendarEvents = calendar.reduce((eventByDay, event) => {
         let {eventName, eventStartTime, eventEndTime} = event;
         eventStartTime = new Date(parseFloat(eventStartTime));
         eventEndTime = new Date(parseFloat(eventEndTime));
@@ -41,7 +47,6 @@ export default function Calendar() {
         return eventByDay;
     }, {})
 
-    //do a map here if object.key has values, create a section obj with ID, title and array that contains all values for that key
     const eventsByDay = Object.keys(calendarEvents).map((event, index) => {
         return {
             id: index,
@@ -49,15 +54,6 @@ export default function Calendar() {
             data: calendarEvents[event]
         }
     })
-
-    //store events by weekday
-    //create a sectionList for those events with the section being the day if available
-    //use above to create section list 
-    //http://www.reactnativeexpress.com/sectionlist
-
-
-    //add border bottom to text for hrule 
-    //map over events
 
     return (
         <View style={styles.container}>
@@ -85,7 +81,8 @@ const styles = StyleSheet.create({
     },
     header: {
         fontSize: 27,
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+        color: '#003045'
     },
     day: {
         fontSize: 25,
