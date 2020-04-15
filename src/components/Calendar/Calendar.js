@@ -7,11 +7,13 @@ import { mockEvents } from '../../mockData/mockTreat';
 
 export default function Calendar() {
     //do calcs here to group into a single date object 
+    //dont need to parse float just JSON parse on fetch 
+
     const calendarEvents = mockEvents.reduce((eventByDay, event) => {
         let {eventName, eventStartTime, eventEndTime} = event;
-        eventStartTime = new Date(eventStartTime);
-        eventEndTime = new Date(eventEndTime);
-        const duration = eventEndTime.getTime() - eventStartTime.getTime();
+        eventStartTime = new Date(parseFloat(eventStartTime));
+        eventEndTime = new Date(parseFloat(eventEndTime));
+        const duration = Math.floor((eventEndTime.getTime() - eventStartTime.getTime()) / 60000);
         const eventTime = eventStartTime.getHours();
         const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
         const eventDay = days[eventStartTime.getDay()];
@@ -56,7 +58,7 @@ export default function Calendar() {
                 keyExtractor={(item, index) => item + index}
                 renderItem={({ item }) => <TreatEvent title={item.eventName} duration={item.duration}/>}
                 renderSectionHeader={({ section: { title } }) => (
-                    <Text style={styles.header}>{title}</Text>
+                    <Text style={styles.day}>{title}</Text>
                 )}
             />
         </View>
@@ -65,22 +67,20 @@ export default function Calendar() {
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: "#fff",
+        // flex:1,
         alignItems: "center",
-        // justifyContent: "space-between",
-        // height: 40,
+        justifyContent: "space-around"
+        // flexDirection: "column"
+        // height: "100%",
         // width: 100
     },
     header: {
-        fontSize: 25,
+        fontSize: 27,
+        fontWeight: 'bold'
     },
-    image: {
-        marginTop: 15,
-        width: 150,
-        height: 150,
-        borderColor: "rgba(0,0,0,0.2)",
-        borderWidth: 3,
-        borderRadius: 150
+    day: {
+        fontSize: 25,
+        marginTop: 30
     },
     categories: {
         backgroundColor: "#fff",
