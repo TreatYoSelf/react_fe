@@ -9,6 +9,15 @@ export default function Calendar() {
     //do calcs here to group into a single date object 
     //dont need to parse float just JSON parse on fetch 
 
+    //abstract these to helpers 
+    const fetchEvents = () => {
+        fetch('https://treat-yo-self-bjtw.herokuapp.com/api/v1/users/events')
+            .then(resp => resp.json())
+            .then(data => console.log('fetchedEvt', data))
+            .catch(err => console.log(err))
+    }
+    fetchEvents()
+
     const calendarEvents = mockEvents.reduce((eventByDay, event) => {
         let {eventName, eventStartTime, eventEndTime} = event;
         eventStartTime = new Date(parseFloat(eventStartTime));
