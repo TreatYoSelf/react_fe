@@ -15,18 +15,18 @@ export const mockTreatSched = {
 
 export const mockEvents = [{
         "eventName": "Hike",
-            "eventStartTime": "2020-04-13 13:31:31 -0700",
-            "eventEndTime": "2020-04-13 14:31:31 -0700"
+            "eventStartTime": "1394648309130.185",
+            "eventEndTime": "1394651309130.185"
     },
     {
         "eventName": "Spa Day",
-            "eventStartTime": "2020-04-14 13:31:31 -0700",
-            "eventEndTime": "2020-04-14 14:31:31 -0700"
+            "eventStartTime": "1396678309130.185",
+            "eventEndTime": "1396682309130.185"
     },
     {
         "eventName": "Yoga",
-            "eventStartTime": "2020-04-14 13:31:31 -0700",
-            "eventEndTime": "2020-04-14 14:31:31 -0700"
+            "eventStartTime": "1396678509130.185",
+            "eventEndTime": "1396682309130.185"
     }];
 
 //have one task that's scheduled
