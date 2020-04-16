@@ -1,12 +1,12 @@
 import React from 'react';
 import renderer, { act } from 'react-test-renderer';
 
-import Landing from './Landing';
+import TreatSelector from './TreatSelector';
 
-describe('<Landing />', () => {
+describe('<TreatSelector />', () => {
     it('renders correctly', async () => {
         let tree;
-        tree = renderer.create(<Landing />).toJSON();
+        tree = renderer.create(<TreatSelector />).toJSON();
         expect(tree).toMatchSnapshot();
     });
 });

@@ -1,0 +1,46 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<TreatSelector /> renders correctly 1`] = `
+<View
+  accessible={true}
+  focusable={true}
+  isTVSelectable={true}
+  onClick={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    Object {
+      "alignItems": "center",
+      "backgroundColor": "honeydew",
+      "borderColor": "#003045",
+      "borderWidth": 5,
+      "flexDirection": "row",
+      "justifyContent": "space-around",
+      "opacity": 1,
+      "padding": 10,
+      "width": 300,
+    }
+  }
+>
+  <Image
+    source={1}
+    style={
+      Object {
+        "height": 50,
+        "width": 50,
+      }
+    }
+  />
+  <Text
+    style={
+      Object {
+        "fontWeight": "bold",
+      }
+    }
+  />
+</View>
+`;
