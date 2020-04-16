@@ -1,13 +1,11 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, Image, View, Button, AsyncStorage } from 'react-native';
 import * as Google from 'expo-google-app-auth';
-import Profile from '../../components/Profile/Profile';
 import PreferenceForm from '../PreferenceForm/PreferenceForm';
-import { mockUser } from '../../mockData/mockTreat';
-mockUser
+import { fetchData } from "../../helpers/fetch";
 
 export default function Login() {
-    const [signedIn, setSignIn] = useState(true);
+    const [signedIn, setSignIn] = useState(false);
 
     const registerUser = ({user: {givenName, familyName, email}, accessToken, refreshToken}) => {
         const options = {
@@ -24,16 +22,14 @@ export default function Login() {
             })
         }   
 
-        // fetch('https://treat-yo-self-bjtw.herokuapp.com/api/v1/users', options)
-        //     .then(resp => resp.json())
-        //     .then(data => console.log(data))
-        //     .catch(err => console.log(err))
+        fetchData('https://treat-yo-self-bjtw.herokuapp.com/api/v1/users', options)
+            .catch(err => console.log(err))
     }
 
     const saveUserDetails = async details => {
         try {
             const userToStore = await JSON.stringify(details)
-            await AsyncStorage.setItem('user', mockUser);
+            await AsyncStorage.setItem('user', userToStore);
         } catch (error) {
             console.log(error.message);
         }
@@ -65,7 +61,6 @@ export default function Login() {
                 <PreferenceForm />
             ) : (
                 <LoginPage signIn={signIn} />
-                // <Landing signIn={this.signIn}/>
                 )}
         </View>
     )
@@ -81,15 +76,6 @@ const LoginPage = props => {
         </View>
     )
 }
-
-// const LoggedInPage = props => {
-//     return (
-//         <View style={styles.container}>
-//             <Text style={styles.header}>Welcome:{props.name}</Text>
-//             <Image style={styles.image} source={{ uri: props.photoUrl }} />
-//         </View>
-//     )
-// }
 
 const styles = StyleSheet.create({
     container: {
