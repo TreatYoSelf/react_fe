@@ -4,6 +4,7 @@ import TreatSelector from '../../containers/TreatSelector/TreatSelector';
 import { gql } from 'apollo-boost';
 import { useQuery } from '@apollo/react-hooks';
 import { Link } from "react-router-native";
+import { fetchData } from "../../helpers/fetch";
 
 export const FETCH_CATEGORIES = gql`
     {
@@ -15,22 +16,10 @@ export const FETCH_CATEGORIES = gql`
 
 export default function PreferenceForm() {
     let catDisplay, allCategories = [];
-    let selectedCategories = {};
     const [selectedStatus, setSelectionStatus] = useState(false);
+    const [selectedCategories, setCategories] = useState({});
 
-    const { error, data } = useQuery(FETCH_CATEGORIES, { errorPolicy: 'all' });
-    //need to error display
-    // if (error) {
-    //     setErrors(error)
-    // }
-
-    //this needs to be refactored to a toggle.
-    //store as object for easy removal 
-
-    //create toggle as two separate tasks. 
-    //one should go through and as long as 
-
-    //fix up naming convention here 
+    const { data } = useQuery(FETCH_CATEGORIES, { errorPolicy: 'all' });
     const postPreferences = (chosenCat) => {
         const options = {
             headers: {
@@ -40,18 +29,20 @@ export default function PreferenceForm() {
             body: JSON.stringify(chosenCat)
         }
 
-        // fetch('https://treat-yo-self-bjtw.herokuapp.com/api/v1/suggestions', options)
-        //     .then(resp => resp.json())
-        //     .then(data => console.log('preferences posted'))
-        //     .catch(err => console.log(err))
+        fetchData('https://treat-yo-self-bjtw.herokuapp.com/api/v1/suggestions', options)
+            .then(resp => resp.json())
+            .then(data => console.log(data))
+            .catch(err => console.log(err))
     }
 
     const selectCategory = (category, id) => {
         if (allCategories[id].isSelect) {
             allCategories[id].isSelect = false;
-            delete selectedCategories[id];
+            delete selectedCategories[category];
+            setCategories(selectedCategories)
         } else if (Object.keys(selectedCategories).length < 3) {
-            selectedCategories[id] = category;
+            selectedCategories[category] = category;
+            setCategories(selectedCategories)
             allCategories[id].isSelect = true;
             if (Object.keys(selectedCategories).length === 3) {
                 setSelectionStatus(true)
@@ -60,10 +51,7 @@ export default function PreferenceForm() {
     }
 
     const submitSelection = () => {
-            console.log('hit')
-            // postPreferences(Object.keys(selectedCategories))
-            //navigate back to profile also 
-        //if failed submit error message
+        postPreferences(Object.keys(selectedCategories))
     }
 
     if (data) {
@@ -100,9 +88,6 @@ export default function PreferenceForm() {
 const styles = StyleSheet.create({
     container: {
         alignItems: "center",
-        // justifyContent: "space-between",
-        // height: 40,
-        // width: 100
     },
     header: {
         fontSize: 25,
@@ -119,8 +104,6 @@ const styles = StyleSheet.create({
     categories: {
         backgroundColor: "#fff",
         flexGrow: 0,
-        // height: 60
-        // width: 100
     },
     button: {
         alignItems: 'center',
