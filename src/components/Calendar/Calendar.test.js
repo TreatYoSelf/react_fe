@@ -1,12 +1,12 @@
 import React from 'react';
 import renderer, { act } from 'react-test-renderer';
 
-import Landing from './Landing';
+import Calendar from './Calendar';
 
-describe('<Landing />', () => {
+describe('<Calendar />', () => {
     it('renders correctly', async () => {
         let tree;
-        tree = renderer.create(<Landing />).toJSON();
+        tree = renderer.create(<Calendar />).toJSON();
         expect(tree).toMatchSnapshot();
     });
 });

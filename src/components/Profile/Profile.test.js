@@ -20,12 +20,14 @@ describe('<Profile />', () => {
         },
     ];
 
-    beforeEach(() => {
-        tree = renderer.create(
+    beforeEach(async () => {
+        await act(async () => {
+        tree = await renderer.create(
             <MockedProvider mocks={mocks} addTypename={false}>
                  <Profile />
             </MockedProvider>
         ).toJSON();
+        })
     })
 
     it('has 3 children', () => {
