@@ -1,15 +1,28 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 import { MockedProvider } from '@apollo/react-testing';
+import { act } from 'react-dom/test-utils';
 
 import Profile from './Profile';
+import { FETCH_CATEGORIES } from '../../containers/PreferenceForm/PreferenceForm';
+import { mockCategories } from '../../mockData/mockTreat';
 
 describe('<Profile />', () => {
     let tree;
+    const mocks = [
+        {
+            request: {
+                query: FETCH_CATEGORIES,
+            },
+            result: {
+                data: mockCategories
+            },
+        },
+    ];
 
     beforeEach(() => {
         tree = renderer.create(
-            <MockedProvider addTypename={false}>
+            <MockedProvider mocks={mocks} addTypename={false}>
                  <Profile />
             </MockedProvider>
         ).toJSON();

@@ -8,6 +8,27 @@ export default function Login() {
     const [userDetails, setUserDetails] = useState({});
     const [signedIn, setSignIn] = useState(false);
 
+    const registerUser = ({user: {givenName, familyName, email}, accessToken, refreshToken}) => {
+        const options = {
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            method: "POST",
+            body: JSON.stringify({
+                first_name: givenName,
+                last_name: familyName,
+                email,
+                google_token: accessToken,
+                google_refresh_token: refreshToken
+            })
+        }   
+
+        fetch('https://treat-yo-self-bjtw.herokuapp.com/api/v1/users', options)
+            .then(resp => resp.json())
+            .then(data => console.log(data))
+            .catch(err => console.log(err))
+    }
+
     signIn = async () => {
         try {
             const result = await Google.logInAsync({
@@ -17,6 +38,7 @@ export default function Login() {
             })
 
             if (result.type === "success") {
+                // registerUser(result)
                 setUserDetails(result)
                 setSignIn(true)
             } else {
@@ -30,7 +52,7 @@ export default function Login() {
     return (
         <View style={styles.container}>
             {signedIn ? (
-                <Profile name={userDetails.user.name} photoUrl={userDetails.user.photoUrl} />
+                <Profile name={userDetails.user.givenName} photoUrl={userDetails.user.photoUrl} />
             ) : (
                 <LoginPage signIn={this.signIn} />
                 // <Landing signIn={this.signIn}/>
@@ -62,7 +84,6 @@ const LoginPage = props => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: "#fff",
         alignItems: "center",
         justifyContent: "space-around",
         margin: 50,

@@ -13,5 +13,56 @@ export const mockTreatSched = {
     duration: ''
 }
 
+export const mockCategories = {
+    getCategories: [
+        {
+            "name": "Outdoor",
+        },
+        {
+            "name": "Beauty",
+        },
+        {
+            "name": "Exercise",
+        },
+        {
+            "name": "Home",
+        },
+        {
+            "name": "Organizing",
+        },
+        {
+            "name": "Food",
+        },
+        {
+            "name": "Mindfulness",
+        },
+        {
+            "name": "Group",
+        },
+        {
+            "name": "Event",
+        },
+        {
+            "name": "Enrichment",
+        },
+    ]
+}
+
+export const mockEvents = [{
+        "eventName": "Hike",
+            "eventStartTime": "1394648309130.185",
+            "eventEndTime": "1394651309130.185"
+    },
+    {
+        "eventName": "Spa Day",
+            "eventStartTime": "1396678309130.185",
+            "eventEndTime": "1396682309130.185"
+    },
+    {
+        "eventName": "Yoga",
+            "eventStartTime": "1396678509130.185",
+            "eventEndTime": "1396682309130.185"
+    }];
+
 //have one task that's scheduled
 //have one task that's just a potential 

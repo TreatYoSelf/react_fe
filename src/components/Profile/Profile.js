@@ -1,68 +1,46 @@
-import React, { useEffect, useState } from 'react';
-import { StyleSheet, Text, Image, View, ScrollView, FlatList, TouchableOpacity } from 'react-native';
-import SuggestedTreat from '../../containers/suggestedTreat/SuggestedTreat';
-import { gql } from 'apollo-boost';
-import { useQuery } from '@apollo/react-hooks';
+import React, { useState } from 'react';
+import { StyleSheet, Text, Image, View } from 'react-native';
+import PreferenceForm from '../../containers/PreferenceForm/PreferenceForm';
 
 export default function Profile(props) {
-    let catDisplay, selectedCategories = [];
-    const myQuery = gql`
-        {
-          getCategories {
-            name
-          }
+    const [preferences, setPreference] = useState([]);
+
+    //need a button that redirects to PreferenceForm
+    //pass through state to set preference on submit
+    //on submit of preference reroutes to profile
+    //dynamically display button based on preference 
+    //make graphQL post here 
+
+    const postPreferences = () => {
+        const options = {
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            method: "POST",
+            body: JSON.stringify(preferences)
         }
-      `;
 
-    const { error, data } = useQuery(myQuery, { errorPolicy: 'all' });
-    //need to error display
-    // if (error) {
-    //     setErrors(error)
-    // }
-
-    //this needs to be refactored to a toggle.
-    //store as object for easy removal 
-    const selectCategory = (category) => {
-        if (selectedCategories.length < 3) {
-            selectedCategories.push(category)
-        }
-    }
-
-    const submitSelection = () => {
-        if (selectedCategories.length === 3) {
-            console.log(selectedCategories)
-        }
-    }
-
-    //add a selected property to each data item before passing through to flatList
-    //make selectCategory toggle that selected boolean
-    //conditionally style each treat based on that to say if selected or not
-    //use that check to remove from selected array if true and clicked
-
-    if (data) {
-        catDisplay = <FlatList
-            data={data.getCategories}
-            renderItem={({ item, index }) => (
-                <SuggestedTreat key={index} title={item.name} selectCategory={selectCategory} />
-            )}
-        />
+        fetch('https://treat-yo-self-bjtw.herokuapp.com/api/v1/suggestions ', options)
+            .then(resp => resp.json())
+            .then(data => console.log(data))
+            .catch(err => console.log(err))
     }
 
     return (
         <View style={styles.container}>
-            <Text style={styles.header}>Welcome:{props.name}</Text>
+            <Text style={styles.header}>Welcome {props.name}</Text>
             <Image style={styles.image} source={{ uri: props.photoUrl }} />
-            {catDisplay}
-            <TouchableOpacity style={styles.container} onPress={() => submitSelection()}>
-                <Text style={styles.header}>Submit</Text>
-            </TouchableOpacity>
+            {preferences.length ? (
+                <Button />
+            ) : (
+                <PreferenceForm setPreference={setPreference} />
+                )}
         </View>
     );
 }
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: "#fff",
         alignItems: "center",
         // justifyContent: "space-between",
         // height: 40,
