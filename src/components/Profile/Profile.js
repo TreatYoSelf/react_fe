@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, Image, View, TouchableOpacity, ActivityIndicator, AsyncStorage } from 'react-native';
 import { Link } from "react-router-native";
+import { fetchData } from "../../helpers/fetch";
 
 export default function Profile() {
     const [user, setUser] = useState({ name: '', photoUrl: '' });
@@ -24,11 +25,10 @@ export default function Profile() {
     }
 
     const generateEvents = () => {
-        console.log('hit')
-        // fetch('https://treat-yo-self-bjtw.herokuapp.com/api/v1/suggestions')
-        //     .then(resp => resp.json())
-        //     .then(data => console.log(data))
-        //     .catch(err => console.log(err))
+        fetchData('https://treat-yo-self-bjtw.herokuapp.com/api/v1/suggestions')
+            .then(resp => resp.json())
+            .then(data => console.log(data))
+            .catch(err => console.log(err))
         }
 
     return (
@@ -54,12 +54,11 @@ export default function Profile() {
 const styles = StyleSheet.create({
     container: {
         alignItems: "center",
-        justifyContent: "space-around",
-        // height: 40,
-        // width: 100
+        justifyContent: "space-around"
     },
     header: {
         fontSize: 25,
+        color: '#003045'
     },
     image: {
         marginTop: 15,
@@ -72,8 +71,6 @@ const styles = StyleSheet.create({
     categories: {
         backgroundColor: "#fff",
         flexGrow: 0,
-        // height: 60
-        // width: 100
     },
     button: {
         alignItems: 'center',
@@ -83,5 +80,6 @@ const styles = StyleSheet.create({
         padding: 10,
         backgroundColor: "honeydew",
         borderWidth: 5,
+        borderColor: '#003045',
     }
 })
