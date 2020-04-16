@@ -1,0 +1,17 @@
+export const outdoor = require('../../assets/icons/categories/outdoor.png');
+export const beauty = require('../../assets/icons/categories/beauty.png');
+export const cleaning = require('../../assets/icons/categories/cleaning.png');
+export const enrichment = require('../../assets/icons/categories/communityService.png');
+export const food = require('../../assets/icons/categories/cooking.png');
+export const event = require('../../assets/icons/categories/crafting.png');
+export const exercise = require('../../assets/icons/categories/exercise.png');
+export const home = require('../../assets/icons/categories/gardening.png');
+export const group = require('../../assets/icons/categories/group.png');
+export const indoor = require('../../assets/icons/categories/indoor.png');
+export const journaling = require('../../assets/icons/categories/journaling.png');
+export const mindfulness = require('../../assets/icons/categories/mindfulness.png');
+export const music = require('../../assets/icons/categories/music.png');
+export const organizing = require('../../assets/icons/categories/organizing.png');
+export const reading = require('../../assets/icons/categories/reading.png');
+export const shopping = require('../../assets/icons/categories/shopping.png');
+export const solo = require('../../assets/icons/categories/solo.png');
