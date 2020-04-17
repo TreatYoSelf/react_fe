@@ -15,7 +15,7 @@ exports[`<TreatSelector /> renders correctly 1`] = `
   style={
     Object {
       "alignItems": "center",
-      "backgroundColor": "honeydew",
+      "backgroundColor": "#e6f7ff",
       "borderColor": "#003045",
       "borderWidth": 5,
       "flexDirection": "row",
@@ -27,7 +27,6 @@ exports[`<TreatSelector /> renders correctly 1`] = `
   }
 >
   <Image
-    source={1}
     style={
       Object {
         "height": 50,
@@ -41,6 +40,8 @@ exports[`<TreatSelector /> renders correctly 1`] = `
         "fontWeight": "bold",
       }
     }
-  />
+  >
+    testTreat
+  </Text>
 </View>
 `;
