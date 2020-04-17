@@ -1,12 +1,18 @@
 import React from 'react';
-import renderer, { act } from 'react-test-renderer';
-
+import { act, create } from 'react-test-renderer';
 import TreatSelector from './TreatSelector';
 
 describe('<TreatSelector />', () => {
-    it('renders correctly', async () => {
+    it('renders correctly', () => {
         let tree;
-        tree = renderer.create(<TreatSelector />).toJSON();
+        const props = {
+            id: 1,
+            title: 'testTreat',
+            selectCategory: jest.fn(),
+            style: ''
+        }
+
+        tree = create(<TreatSelector {...props} />).toJSON();
         expect(tree).toMatchSnapshot();
     });
 });

@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, Image, View, Button, AsyncStorage } from 'react-native';
+import { StyleSheet, Text, Image, View, Button } from 'react-native';
 import * as Google from 'expo-google-app-auth';
 import PreferenceForm from '../PreferenceForm/PreferenceForm';
 import { fetchData } from "../../helpers/fetch";
+import AsyncStorage from '@react-native-community/async-storage';
 
 export default function Login() {
     const [signedIn, setSignIn] = useState(false);
