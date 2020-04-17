@@ -5,7 +5,7 @@ export default function TreatEvent({ title, duration, time }) {
     return (
         <View>
             <Text style={styles.header}>{parseInt(time) < 12 ? `${time} AM` : `${time % 12} PM`}</Text>
-            <View style={[styles.container]} onPress={() => selectCategory(`${title}`, id)}>
+            <View style={styles.container}>
                 <Text style={styles.header}>{title}</Text>
                 <Text style={styles.header}>{`${duration} Mins`}</Text>
             </View>

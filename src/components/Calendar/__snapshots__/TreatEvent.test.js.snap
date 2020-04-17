@@ -1,0 +1,103 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<TreatEvent /> renders correctly 1`] = `
+<View>
+  <Text
+    style={
+      Object {
+        "color": "#003045",
+        "fontWeight": "bold",
+      }
+    }
+  >
+    10 AM
+  </Text>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "backgroundColor": "#e6f7ff",
+        "borderColor": "#003045",
+        "borderWidth": 5,
+        "flexDirection": "row",
+        "justifyContent": "space-around",
+        "margin": 10,
+        "padding": 10,
+        "width": 300,
+      }
+    }
+  >
+    <Text
+      style={
+        Object {
+          "color": "#003045",
+          "fontWeight": "bold",
+        }
+      }
+    >
+      testEvent
+    </Text>
+    <Text
+      style={
+        Object {
+          "color": "#003045",
+          "fontWeight": "bold",
+        }
+      }
+    >
+      75 Mins
+    </Text>
+  </View>
+</View>
+`;
+
+exports[`<TreatEvent /> renders correctly 2`] = `
+<View>
+  <Text
+    style={
+      Object {
+        "color": "#003045",
+        "fontWeight": "bold",
+      }
+    }
+  >
+    4 PM
+  </Text>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "backgroundColor": "#e6f7ff",
+        "borderColor": "#003045",
+        "borderWidth": 5,
+        "flexDirection": "row",
+        "justifyContent": "space-around",
+        "margin": 10,
+        "padding": 10,
+        "width": 300,
+      }
+    }
+  >
+    <Text
+      style={
+        Object {
+          "color": "#003045",
+          "fontWeight": "bold",
+        }
+      }
+    >
+      testEvent
+    </Text>
+    <Text
+      style={
+        Object {
+          "color": "#003045",
+          "fontWeight": "bold",
+        }
+      }
+    >
+      75 Mins
+    </Text>
+  </View>
+</View>
+`;
