@@ -1,7 +1,6 @@
 import React from 'react';
-import App from './src/components/App/App';
+import Index from './src/components/Index/Index';
 
-// import { AppRegistry } from 'react-native';
 import { ApolloClient } from 'apollo-client';
 import { ApolloProvider } from '@apollo/react-hooks';
 import { HttpLink, InMemoryCache } from 'apollo-boost';
@@ -15,7 +14,7 @@ const client = new ApolloClient({
 export default function App() {
     return (
         <ApolloProvider client={client}>
-            <App />
+            <Index />
         </ApolloProvider>
     );
 }

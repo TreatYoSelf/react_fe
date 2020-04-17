@@ -2,15 +2,15 @@ import React from 'react';
 import renderer from 'react-test-renderer';
 import { MockedProvider } from '@apollo/react-testing';
 
-import App from './App';
+import Index from './Index';
 
-describe('<App />', () => {
+describe('<Index />', () => {
     let tree;
 
     beforeEach(() => {
         tree = renderer.create(
             <MockedProvider addTypename={false}>
-                <App />
+                <Index />
             </MockedProvider>
         ).toJSON();
     })

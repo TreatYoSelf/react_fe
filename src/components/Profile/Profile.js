@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, Text, Image, View, TouchableOpacity, ActivityIndicator } from 'react-native';
+import { StyleSheet, Text, Image, View, TouchableOpacity, ActivityIndicator, AsyncStorage } from 'react-native';
 import { Link } from "react-router-native";
 import { fetchData } from "../../helpers/fetch";
-import AsyncStorage from '@react-native-community/async-storage';
 
 export default function Profile() {
     const [user, setUser] = useState({ name: '', photoUrl: '' });
