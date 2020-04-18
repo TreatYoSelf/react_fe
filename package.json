@@ -32,7 +32,15 @@
     "preset": "jest-expo",
     "transformIgnorePatterns": [
       "node_modules/(?!(jest-)?react-native|react-router-native|react-clone-referenced-element|@react-native-community|expo(nent)?|@expo(nent)?/.*|react-navigation|@react-navigation/.*|@unimodules/.*|unimodules|sentry-expo|native-base)"
-    ]
+    ],
+    "coverageThreshold": {
+          "global": {
+            "branches": 50,
+            "functions": 50,
+            "lines": 50,
+            "statements": 50
+          }
+    }
   },
   "private": true
 }
