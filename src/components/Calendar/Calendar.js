@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, Text, View, SectionList } from 'react-native';
+import { StyleSheet, Text, View, SectionList, ActivityIndicator } from 'react-native';
 import TreatEvent from './TreatEvent';
-import { mockEvents } from '../../mockData/mockTreat';
 import { Link } from "react-router-native";
 import { fetchData } from "../../helpers/fetch";
 
 export default function Calendar() {
-    const [calendar, setCal] = useState(mockEvents);
+    const [calendar, setCal] = useState([]);
     const [calReturned, fetchCal] = useState(false);
 
     useEffect(() => {
@@ -57,19 +56,25 @@ export default function Calendar() {
     })
 
     return (
-        <View style={styles.container}>
-            <Text style={styles.header}>Your Treats This Week</Text>
-            <SectionList
-                sections={eventsByDay}
-                keyExtractor={(item, index) => item + index}
-                renderItem={({ item }) => <TreatEvent title={item.event} duration={item.duration} time={item.eventTime}/>}
-                renderSectionHeader={({ section: { title } }) => (
-                    <Text style={styles.day}>{title}</Text>
+        <View style={styles.wrapper}>
+            {calendar.length ? (
+                <View style={styles.container}>
+                    <Text style={styles.header}>Your Treats This Week</Text>
+                    <SectionList
+                        sections={eventsByDay}
+                        keyExtractor={(item, index) => item + index}
+                        renderItem={({ item }) => <TreatEvent title={item.event} duration={item.duration} time={item.eventTime} />}
+                        renderSectionHeader={({ section: { title } }) => (
+                            <Text style={styles.day}>{title}</Text>
+                        )}
+                    />
+                    <Link to="/profile" style={styles.button} >
+                        <Text>Profile</Text>
+                    </Link>
+                </View>
+            ) : (
+                    <ActivityIndicator />
                 )}
-            />
-            <Link to="/profile" style={styles.button} >
-                <Text>Profile</Text>
-            </Link>
         </View>
     );
 }
