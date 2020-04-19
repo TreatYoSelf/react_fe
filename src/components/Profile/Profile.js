@@ -32,11 +32,14 @@ export default function Profile() {
         }
 
     return (
-        <View>
+        <View style={styles.wrapper}>
             {user.name ? (
                 <View style={styles.container}>
-                    <Text style={styles.header}>Welcome {user.givenName}</Text>
+                    <Text style={styles.header}>Welcome {user.givenName}!</Text>
                     <Image style={styles.image} source={{ uri: user.photoUrl }} />
+                    <Link to="/preferenceform" style={styles.button} >
+                        <Text>Update Preferences</Text>
+                    </Link>
                     <Link to="/calendar" style={styles.button} >   
                         <Text>View Calendar</Text>
                     </Link>
@@ -52,12 +55,23 @@ export default function Profile() {
 }
 
 const styles = StyleSheet.create({
+    wrapper: {
+        borderColor: "#003045",
+        borderWidth: 1,
+        padding: 20,
+        width: "80%",
+        height: "80%",
+        alignSelf: "center",
+        borderRadius: 30
+    },
     container: {
         alignItems: "center",
-        justifyContent: "space-around"
+        justifyContent: "space-around",
+        width: "100%",
+        height: "100%",
     },
     header: {
-        fontSize: 25,
+        fontSize: 30,
         color: '#003045'
     },
     image: {
@@ -68,10 +82,6 @@ const styles = StyleSheet.create({
         borderWidth: 3,
         borderRadius: 150
     },
-    categories: {
-        backgroundColor: "#fff",
-        flexGrow: 0,
-    },
     button: {
         alignItems: 'center',
         justifyContent: 'space-around',
@@ -79,7 +89,7 @@ const styles = StyleSheet.create({
         width: 300,
         padding: 10,
         backgroundColor: "honeydew",
-        borderWidth: 5,
+        borderWidth: 3,
         borderColor: '#003045',
     }
 })
