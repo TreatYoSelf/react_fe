@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, Image, View, Button, AsyncStorage } from 'react-native';
 import * as Google from 'expo-google-app-auth';
-import PreferenceForm from '../PreferenceForm/PreferenceForm';
 import { fetchData } from "../../helpers/fetch";
+import { Redirect } from "react-router-native";
 
 export default function Login() {
     const [signedIn, setSignIn] = useState(false);
@@ -58,21 +58,14 @@ export default function Login() {
     return (
         <View style={styles.container}>
             {signedIn ? (
-                <PreferenceForm />
+                <Redirect to="/preferenceform" />
             ) : (
-                <LoginPage signIn={signIn} />
-                )}
-        </View>
-    )
-}
-
-const LoginPage = props => {
-    return (
-        <View style={styles.container}>
-            <Image source={require("../../../assets/logo.png")} style={{ width: 200, height: 200 }} />
-            <Text style={styles.header}>Treat Yo Self</Text>
-            <Text>An app where you can treat yourself to some personal time, guilt free.</Text>
-            <Button title="Sign in with Google" onPress={() => props.signIn()} />
+                <View style={styles.container}>
+                        <Image source={require("../../../assets/logo.png")} style={{ width: 200, height: 200 }} />
+                        <Text style={styles.header}>Treat Yo Self</Text>
+                        <Text>An app where you can treat yourself to some personal time, guilt free.</Text>
+                        <Button title="Sign in with Google" onPress={() => signIn()} />
+                </View>)}
         </View>
     )
 }
