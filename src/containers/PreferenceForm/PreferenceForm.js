@@ -31,7 +31,7 @@ export default function PreferenceForm() {
 
         fetchData('https://treat-yo-self-bjtw.herokuapp.com/api/v1/suggestions', options)
             .then(resp => resp.json())
-            .then(data => console.log(data))
+            .then(() => setCategories({}))
             .catch(err => console.log(err))
     }
 
@@ -73,7 +73,7 @@ export default function PreferenceForm() {
 
     return (
         <View style={styles.container}>
-            <Text style={styles.header}>What types of activities are you interested in?</Text>
+            <Text style={styles.header}>Select 3 activity types</Text>
             {catDisplay}
             {selectedStatus && <TouchableOpacity style={styles.button} onPress={() => submitSelection()} disabled={selectedStatus ? false : true}>
                 <Text>Submit Choices</Text>
@@ -87,31 +87,22 @@ export default function PreferenceForm() {
 
 const styles = StyleSheet.create({
     container: {
-        alignItems: "center",
+        alignSelf: "center",
+        justifyContent: "space-between",
+        height: "80%",
+        width: "80%"
     },
     header: {
-        fontSize: 25,
-        color: '#003045'
-    },
-    image: {
-        marginTop: 15,
-        width: 150,
-        height: 150,
-        borderColor: "rgba(0,0,0,0.2)",
-        borderWidth: 3,
-        borderRadius: 150
-    },
-    categories: {
-        backgroundColor: "#fff",
-        flexGrow: 0,
+        fontSize: 28,
+        color: '#003045',
+        alignSelf: "center",
     },
     button: {
         alignItems: 'center',
         justifyContent: 'space-around',
         flexDirection: 'row',
-        width: 300,
         padding: 10,
         backgroundColor: "honeydew",
-        borderWidth: 5,
+        borderWidth: 3,
     }
 })
