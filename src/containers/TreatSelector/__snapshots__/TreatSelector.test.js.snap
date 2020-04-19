@@ -17,12 +17,11 @@ exports[`<TreatSelector /> renders correctly 1`] = `
       "alignItems": "center",
       "backgroundColor": "#e6f7ff",
       "borderColor": "#003045",
-      "borderWidth": 5,
+      "borderWidth": 3,
       "flexDirection": "row",
       "justifyContent": "space-around",
       "opacity": 1,
       "padding": 10,
-      "width": 300,
     }
   }
 >
